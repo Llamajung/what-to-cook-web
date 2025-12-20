@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   robots: { index: true, follow: true },
+  other: {
+    "naver-site-verification": "3778420dc15666259655d2eba632415c9ae4da5c",
+  },
 };
 
 export default function RootLayout({
