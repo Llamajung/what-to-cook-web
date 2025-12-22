@@ -38,20 +38,3 @@ export function getRecipesByIngredient(ingredientRaw: string, limit = 200): Reci
 
   return shuffled.slice(0, limit);
 }
-
-// export function getAllIngredientsTopN(n = 300): string[] {
-//   const freq = new Map<string, number>();
-
-//   for (const r of recipes as Recipe[]) {
-//     for (const ing of r.ingredients ?? []) {
-//       const k = normalizeKorean(ing);
-//       if (!k) continue;
-//       freq.set(k, (freq.get(k) ?? 0) + 1);
-//     }
-//   }
-
-//   return [...freq.entries()]
-//     .sort((a, b) => b[1] - a[1])
-//     .slice(0, n)
-//     .map(([k]) => k);
-// }

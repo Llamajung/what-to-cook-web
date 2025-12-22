@@ -48,7 +48,7 @@ export default function RecipeCard({ id, title, youtuber, ingredients }: Props) 
         </p>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          {ingredients.slice(0, 6).map((ing) => (
+          {ingredients.map((ing) => (
             <span
               key={ing}
               className="rounded-full border border-zinc-200 px-2 py-0.5 text-xs text-zinc-600 dark:border-zinc-800 dark:text-zinc-300"
