@@ -10,6 +10,13 @@ export type Recipe = {
   youtuber: string;
 };
 
+function shuffleArray<T>(array: T[]): T[] {
+  return array
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
+
 type RecipeIDsMap = Record<string, string[]>;
 
 export function getCookNames(): string[] {
@@ -24,5 +31,7 @@ export function getRecipesByCookName(cookName: string, limit = 100): Recipe[] {
 
   // 빠르게 찾기 위해 Set 사용
   const idSet = new Set(ids.slice(0, limit));
-  return (recipes as Recipe[]).filter((r) => idSet.has(r.id));
+
+  const result = (recipes as Recipe[]).filter((r) => idSet.has(r.id));
+  return shuffleArray(result);
 }
