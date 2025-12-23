@@ -1,9 +1,6 @@
 // components/RecipeCard.tsx
 "use client";
 
-import Image from "next/image";
-import { useMemo, useState } from "react";
-
 type Props = {
   id: string;
   title: string;
@@ -12,30 +9,31 @@ type Props = {
 };
 
 export default function RecipeCard({ id, title, youtuber, ingredients }: Props) {
-  // img.youtube.com 보다 i.ytimg.com이 더 안정적인 편
-  const hq = useMemo(() => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`, [id]);
-  const mq = useMemo(() => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`, [id]);
-  const def = useMemo(() => `https://i.ytimg.com/vi/${id}/default.jpg`, [id]);
-
-  const [src, setSrc] = useState(hq);
-
   const url = `https://youtu.be/${id}`;
+
+  // ✅ 썸네일 후보 (hq → mq → default)
+  const hq = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  const mq = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+  const def = `https://i.ytimg.com/vi/${id}/default.jpg`;
 
   return (
     <article className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       <a href={url} target="_blank" rel="noopener noreferrer" className="block">
         <div className="relative aspect-video bg-black">
-          <Image
-            src={src}
+          {/* ✅ Next/Image 최적화 자체를 안 씀 → Vercel Transformation 쿼터 안 잡아먹음 */}
+          <img
+            src={hq}
             alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
-            priority={false}
-            unoptimized
-            onError={() => {
-              // hq 실패 → mq → default 순으로 폴백
-              setSrc((prev) => (prev === hq ? mq : def));
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 h-full w-full object-cover"
+            onError={(e) => {
+              const img = e.currentTarget;
+
+              // hq 실패 -> mq -> default
+              if (img.src === hq) img.src = mq;
+              else if (img.src === mq) img.src = def;
+              else img.src = def; // 최종 고정
             }}
           />
         </div>
@@ -43,12 +41,10 @@ export default function RecipeCard({ id, title, youtuber, ingredients }: Props) 
 
       <div className="p-4">
         <h3 className="line-clamp-2 text-sm font-semibold">{title}</h3>
-        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-          {youtuber}
-        </p>
+        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{youtuber}</p>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          {ingredients.map((ing) => (
+          {ingredients.slice(0, 6).map((ing) => (
             <span
               key={ing}
               className="rounded-full border border-zinc-200 px-2 py-0.5 text-xs text-zinc-600 dark:border-zinc-800 dark:text-zinc-300"
