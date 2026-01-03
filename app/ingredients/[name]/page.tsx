@@ -49,7 +49,7 @@ export default async function IngredientPage({ params }: Props) {
           </p>
 
           <h1 className="text-2xl font-extrabold sm:text-3xl">
-            {ingredient} 활용한 유튜브 레시피 {recipes.length}가지
+            {ingredient} 활용한 레시피 {recipes.length}가지
           </h1>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
