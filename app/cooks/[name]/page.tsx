@@ -19,7 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${decoded} 유튜브 레시피 | 뭐해먹지`,
       description: `${decoded} 관련 유튜브 레시피를 모아봤어요.`,
+      url: `/cooks/${encodeURIComponent(decoded)}`,
     },
+    alternates: {
+      canonical: `/cooks/${encodeURIComponent(decoded)}`,
+    },
+    
   };
 }
 

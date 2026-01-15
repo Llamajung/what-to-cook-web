@@ -7,7 +7,7 @@
 //   );
 // }
 
-// export const metadata = {
+// export const meta data = {
 //   title: "오늘 뭐해먹지? | 뭐해먹지",
 //   description: "냉장고 재료로 바로 만들 수 있는 유튜브 레시피 추천",
 // };

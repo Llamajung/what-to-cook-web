@@ -2,10 +2,18 @@
 import type { Metadata } from "next";
 import CooksIndexClient from "./CooksIndexClient"
 
+// export const metadata: Metadata = {
+//   title: "요리명으로 레시피 찾기 | 뭐해먹지",
+//   description:
+//     "요리명(예: 김치전, 가지구이)으로 유튜브 레시피를 빠르게 찾아보세요. ",
+// };
+
 export const metadata: Metadata = {
   title: "요리명으로 레시피 찾기 | 뭐해먹지",
-  description:
-    "요리명(예: 김치전, 가지구이)으로 유튜브 레시피를 빠르게 찾아보세요. ",
+  description: "요리명(예: 김치전, 가지구이)으로 유튜브 레시피를 빠르게 찾아보세요.",
+  alternates: {
+    canonical: "/cooks",
+  },
 };
 
 export default function CooksPage() {

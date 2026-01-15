@@ -4,11 +4,22 @@ import IngredientsIndexClient from "./IngredientsIndexClient";
 // import { getAllIngredientsTopN } from "@/lib/recipes";
 import ingData from "../../components/ingData.json"
 
+// export const metadata: Metadata = {
+//   title: "재료로 레시피 찾기 | 뭐해먹지",
+//   description:
+//     "냉장고 재료(예: 당근, 양파, 계란)로 유튜브 레시피를 바로 찾아보세요. 재료 페이지로 들어가면 해당 재료가 포함된 레시피만 모아볼 수 있어요.",
+// };
+
+
 export const metadata: Metadata = {
   title: "재료로 레시피 찾기 | 뭐해먹지",
   description:
     "냉장고 재료(예: 당근, 양파, 계란)로 유튜브 레시피를 바로 찾아보세요. 재료 페이지로 들어가면 해당 재료가 포함된 레시피만 모아볼 수 있어요.",
+  alternates: {
+    canonical: "/ingredients",
+  },
 };
+
 
 export default function IngredientsIndexPage() {
   // 빈도 상위 N개만 노출 (너무 많으면 SEO/UX 둘다 안좋음)
